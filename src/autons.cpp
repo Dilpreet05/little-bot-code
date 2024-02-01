@@ -6,18 +6,18 @@
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 110;  
-const int TURN_SPEED = 90;
-const int SWING_SPEED = 90;
+const int DRIVE_SPEED = 110/2;  
+const int TURN_SPEED = 90/2;
+const int SWING_SPEED = 90/2;
 
 ///
 // Constants
 ///
 void default_constants() {
-  chassis.pid_heading_constants_set(3, 0, 20);
-  chassis.pid_drive_constants_set(10, 0, 100);
-  chassis.pid_turn_constants_set(3, 0, 20);
-  chassis.pid_swing_constants_set(5, 0, 30);
+  chassis.pid_heading_constants_set(10, 0, 50);
+  chassis.pid_drive_constants_set(.5, 0.235, 5.25);
+  chassis.pid_turn_constants_set(3.5, 0.003, 27);
+  chassis.pid_swing_constants_set(4.5, 0, 33);
 
   chassis.pid_turn_exit_condition_set(300_ms, 3_deg, 500_ms, 7_deg, 750_ms, 750_ms);
   chassis.pid_swing_exit_condition_set(300_ms, 3_deg, 500_ms, 7_deg, 750_ms, 750_ms);
