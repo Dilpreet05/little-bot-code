@@ -1,38 +1,5 @@
 #include "main.h"
 
-/////
-// For installation, upgrading, documentations and tutorials, check out our website!
-// https://ez-robotics.github.io/EZ-Template/
-/////
-
-
-// Chassis constructor
-// ez::Drive chassis (
-//   // Left Chassis Ports (negative port will reverse it!)
-//   //   the first port is used as the sensor
-//   {1, 2, 3}
-
-//   // Right Chassis Ports (negative port will reverse it!)
-//   //   the first port is used as the sensor
-//   ,{-4, -5, -6}
-
-//   // IMU Port
-//   ,7
-
-//   // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
-//   ,3.25
-
-//   // Cartridge RPM
-//   ,600
-
-//   // External Gear Ratio (MUST BE DECIMAL) This is WHEEL GEAR / MOTOR GEAR
-//   // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be 84/36 which is 2.333
-//   // eg. if your drive is 60:36 where the 36t is powered, your RATIO would be 60/36 which is 0.6
-//   // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 36/60 which is 0.6
-//   ,1.6667
-// );
-
-
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -41,8 +8,6 @@
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-  // Print our branding over your terminal :D
-  ez::ez_template_print();
   
   pros::delay(500); // Stop the user from doing anything while legacy ports configure
 
