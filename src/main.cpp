@@ -23,13 +23,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-    Auton("Example Drive\n\nDrive forward and come back.", drive_example),
-    Auton("Example Turn\n\nTurn 3 times.", turn_example),
-    Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
-    Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
-    Auton("Swing Example\n\nSwing in an 'S' curve", swing_example),
-    Auton("Combine all 3 movements", combining_movements),
-    Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),
+
   });
 
   // Initialize chassis and auton selector
@@ -109,23 +103,22 @@ void opcontrol() {
     
     // PID Tuner
     // After you find values that you're happy with, you'll have to set them in auton.cpp
-    if (!pros::competition::is_connected()) { 
-      // Enable / Disable PID Tuner
-      //  When enabled: 
-      //  * use A and Y to increment / decrement the constants
-      //  * use the arrow keys to navigate the constants
-      if (master.get_digital_new_press(DIGITAL_X)) 
-        chassis.pid_tuner_toggle();
+    // if (!pros::competition::is_connected()) { 
+    //   // Enable / Disable PID Tuner
+    //   //  When enabled: 
+    //   //  * use A and Y to increment / decrement the constants
+    //   //  * use the arrow keys to navigate the constants
+    //   if (master.get_digital_new_press(DIGITAL_X)) 
+    //     chassis.pid_tuner_toggle();
         
-      // Trigger the selected autonomous routine
-      if (master.get_digital_new_press(DIGITAL_B)) 
-        autonomous();
+    //   // Trigger the selected autonomous routine
+    //   if (master.get_digital_new_press(DIGITAL_B)) 
+    //     autonomous();
 
-      chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
-    } 
+    //   chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
+    // } 
 
-    chassis.opcontrol_arcade_standard(ez::SPLIT); // Standard split arcade
-
+  updateDrive();
 
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME

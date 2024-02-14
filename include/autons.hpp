@@ -4,12 +4,29 @@
 
 extern Drive chassis;
 
-void drive_example();
-void turn_example();
-void drive_and_turn();
-void wait_until_change_speed();
-void swing_example();
-void combining_movements();
-void interfered_example();
+void tuneForwardBackward();
+void tuneHeading();
+void tuneTurn();
+void tuneSwing();
+
 
 void default_constants();
+
+
+void skills();
+void match();
+
+void intakeDown();
+void intakeUp();
+void intakeIn();
+void intakeOut();
+void leftWingDown();
+void rightWingDown();
+void wingsDown();
+void leftWingUp();
+void rightWingUp();
+void wingsUp();
+void hangUp();
+void hangDown();
+void ratchetEngage();
+void ratchetDisengage();
