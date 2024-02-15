@@ -16,10 +16,14 @@ void default_constants();
 void skills();
 void match();
 
-void intakeDown();
-void intakeUp();
-void intakeIn();
-void intakeOut();
+void skillsCycle();
+
+void intakeMoveDown();
+void intakeMoveUp();
+void intakeMovementStop();
+void intakeSpinIn();
+void intakeSpinOut();
+void intakeSpinStop();
 void leftWingDown();
 void rightWingDown();
 void wingsDown();
@@ -28,5 +32,7 @@ void rightWingUp();
 void wingsUp();
 void hangUp();
 void hangDown();
+void hangStop();
 void ratchetEngage();
 void ratchetDisengage();
+void ratchetStop();

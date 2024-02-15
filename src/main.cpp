@@ -14,7 +14,7 @@ void initialize() {
   // Configure your chassis controls
   chassis.opcontrol_curve_buttons_toggle(true); // Enables modifying the controller curve with buttons on the joysticks
   chassis.opcontrol_drive_activebrake_set(0); // Sets the active brake kP. We recommend 0.1.
-  chassis.opcontrol_curve_default_set(0, 0); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
+  chassis.opcontrol_curve_default_set(0, 4.1); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
   default_constants(); // Set the drive to your own constants from autons.cpp!
 
   // These are already defaulted to these buttons, but you can change the left/right curve buttons here!
@@ -23,7 +23,12 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-
+    Auton("Match: ", match),
+    Auton("Skills: ", skills),
+    Auton("Tune Forward/Backward: ", tuneForwardBackward),
+    Auton("Tune Heading: ",tuneHeading),
+    Auton("Tune Turn: ", tuneTurn),
+    Auton("Tune Swing: ", tuneSwing),
   });
 
   // Initialize chassis and auton selector
@@ -98,27 +103,33 @@ void autonomous() {
 void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_BRAKE);
+  chassis.pid_tuner_print_terminal_set(true);
   
   while (true) {
     
     // PID Tuner
     // After you find values that you're happy with, you'll have to set them in auton.cpp
-    // if (!pros::competition::is_connected()) { 
-    //   // Enable / Disable PID Tuner
-    //   //  When enabled: 
-    //   //  * use A and Y to increment / decrement the constants
-    //   //  * use the arrow keys to navigate the constants
-    //   if (master.get_digital_new_press(DIGITAL_X)) 
-    //     chassis.pid_tuner_toggle();
+    if (!pros::competition::is_connected()) { 
+      // Enable / Disable PID Tuner
+      //  When enabled: 
+      //  * use A and Y to increment / decrement the constants
+      //  * use the arrow keys to navigate the constants
+      if (master.get_digital_new_press(DIGITAL_X)) 
+        chassis.pid_tuner_toggle();
         
-    //   // Trigger the selected autonomous routine
-    //   if (master.get_digital_new_press(DIGITAL_B)) 
-    //     autonomous();
+      // Trigger the selected autonomous routine
+      if (master.get_digital_new_press(DIGITAL_B)) 
+        autonomous();
 
-    //   chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
-    // } 
+      chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
+    } 
 
-  updateDrive();
+    // chassis.opcontrol_arcade_standard(ez::SPLIT);
+    updateDrive();
+    spinIntake();
+    moveIntake();
+    updateRatchet();
+    updateHang();
 
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
