@@ -334,7 +334,8 @@
     },
     "upload_options": {
       "slot": 1,
-      "description": "My PROS Project"
+      "description": "LITTLE BOT CODE",
+      "icon": "pizza"
     }
   }
 }

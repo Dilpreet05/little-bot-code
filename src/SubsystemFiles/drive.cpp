@@ -3,7 +3,7 @@
 bool isFlipped = false;
 
 // Chassis constructor
-ez::Drive chassis ({-20,-19,-11}, {1,9,10}, 21 ,2.75,600,0.75);
+ez::Drive chassis ({-20,-19,-11}, {1,6,10}, 21 ,2.75,600,0.75);
 
 
 

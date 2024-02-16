@@ -14,11 +14,11 @@ const int SWING_SPEED = 90;
 // Constants
 ///
 void default_constants() {
-  chassis.pid_heading_constants_set(6, 0, 9.5);
+  chassis.pid_heading_constants_set(6, 0.1, 13);
   chassis.pid_drive_constants_forward_set(7.3,0,18.25);
-  chassis.pid_drive_constants_backward_set(7.4,0,22.75);
-  chassis.pid_turn_constants_set(3, 0, 12.75);
-  chassis.pid_swing_constants_set(3, 0, 17);
+  chassis.pid_drive_constants_backward_set(7.4,0,19.25);
+  chassis.pid_turn_constants_set(1.8, 0, 7);
+  chassis.pid_swing_constants_set(4, 0, 17.5);
 
   chassis.pid_turn_exit_condition_set(300_ms, 3_deg, 500_ms, 7_deg, 750_ms, 750_ms);
   chassis.pid_swing_exit_condition_set(300_ms, 3_deg, 500_ms, 7_deg, 750_ms, 750_ms);
@@ -32,6 +32,143 @@ void default_constants() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
+
+void matchOld(){
+
+  
+  // pros::delay(2500);
+  chassis.pid_drive_set(-115,DRIVE_SPEED,true,true);
+  pros::delay(100);
+  intakeMoveDown();
+  pros::delay(250);
+  intakeMovementStop();
+  chassis.pid_wait();
+
+  intakeMoveUp();
+  pros::delay(250);
+  intakeMovementStop();
+
+  chassis.pid_turn_set(135_deg,TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(15_in,DRIVE_SPEED,false,true);
+  chassis.pid_wait();
+
+  chassis.pid_swing_set(ez::LEFT_SWING,225,SWING_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(225+355,TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.drive_angle_set(225);
+
+  chassis.pid_drive_set(5.5_in,DRIVE_SPEED);
+  chassis.pid_wait();
+  
+  
+  pros::delay(500);
+  intakeMoveDown();
+  pros::delay(500);
+  
+  chassis.pid_drive_set(-95,DRIVE_SPEED/2,true,true);
+  // ratchetMotor = 127;
+  // // hangUp();
+  // pros::delay(500);
+  // hangMotor = 80;
+
+  chassis.pid_wait();
+  // hangMotor.brake();
+  // ratchetMotor.brake();
+  intakeMovementStop();
+
+  chassis.pid_swing_set(ez::LEFT_SWING,180_deg,SWING_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(-10_in,DRIVE_SPEED);
+  chassis.pid_wait();
+
+  pros::delay(750);
+
+
+  chassis.pid_drive_set(53,DRIVE_SPEED,true);
+  intakeMoveUp();
+  chassis.pid_wait();
+  intakeMovementStop();
+
+
+  chassis.pid_drive_set(-43,DRIVE_SPEED,true,true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(45,TURN_SPEED);
+  chassis.pid_wait();
+  intakeMoveDown();
+  pros::delay(250);
+
+
+  chassis.pid_turn_set(180,TURN_SPEED/2);
+  chassis.pid_wait();
+  intakeMovementStop();
+
+
+  chassis.pid_drive_set(45,DRIVE_SPEED,true,true);
+  intakeMoveUp();
+  chassis.pid_wait();
+  intakeMovementStop();
+
+  chassis.pid_drive_set(-48,DRIVE_SPEED,true,true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(300,TURN_SPEED);
+  chassis.pid_wait();
+  intakeMoveDown();
+  pros::delay(250);
+  
+
+  chassis.pid_turn_set(180_deg,TURN_SPEED/2);
+  chassis.pid_wait();
+  intakeMovementStop();
+
+  pros::delay(500); // lets the triball settle in the grabber after we turn, makes scoring more consistant
+
+  chassis.pid_drive_set(50_in,DRIVE_SPEED,true,true);
+  intakeMoveUp();
+
+  chassis.pid_wait();
+  intakeMovementStop();
+
+  chassis.pid_drive_set(-10_in,DRIVE_SPEED);
+  chassis.pid_wait();
+
+  pros::delay(250);
+
+  chassis.pid_drive_set(14_in,101);
+  chassis.pid_wait();
+
+
+  chassis.pid_drive_set(-5_in,DRIVE_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(310_deg,TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(55,DRIVE_SPEED,true,true);
+  chassis.pid_wait();
+
+  intakeMoveDown();
+  pros::delay(250);
+  intakeMovementStop();
+
+  // chassis.pid_turn_set(0_deg,TURN_SPEED);
+  // chassis.pid_wait();
+
+  // chassis.pid_drive_set(36_in,DRIVE_SPEED,true);
+  // chassis.pid_wait();
+
+  // chassis.drive_imu_reset();
+
+
+}
+
 void match(){
 
   chassis.drive_imu_reset();
@@ -46,9 +183,7 @@ void match(){
   chassis.pid_turn_set(-45_deg,TURN_SPEED);
   chassis.pid_wait();
 
-  intakeSpinIn();
-
-  chassis.pid_drive_set(36_in,DRIVE_SPEED,true);
+  chassis.pid_drive_set(24_in,DRIVE_SPEED,true);
   chassis.pid_wait();
 
   chassis.pid_drive_set(-18_in,DRIVE_SPEED,true);
@@ -57,7 +192,7 @@ void match(){
   chassis.pid_turn_set(45_deg,TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(30,DRIVE_SPEED,true);
+  chassis.pid_drive_set(-30,DRIVE_SPEED,true);
   chassis.pid_wait();
 
   chassis.pid_turn_set(10_deg,TURN_SPEED);
@@ -69,8 +204,18 @@ void match(){
   chassis.pid_turn_set(0_deg,TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-70_in,DRIVE_SPEED,true);
+  chassis.pid_drive_set(-130_in,DRIVE_SPEED,true);
   chassis.pid_wait();
+  
+
+  chassis.pid_turn_set(135_deg,TURN_SPEED);
+  chassis.pid_wait();
+  intakeMoveUp();
+
+  chassis.pid_drive_set(40,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+
 
 
 
@@ -107,20 +252,16 @@ void skillsCycle(){
   pros::delay(250);
   intakeMovementStop();
 
-  intakeSpinIn();
 
   chassis.pid_drive_set(-10_in,DRIVE_SPEED);
   chassis.pid_wait();
 
-  intakeSpinStop();
 
   chassis.pid_turn_set(45_deg,TURN_SPEED);
   chassis.pid_wait();
 
-  intakeSpinOut();
   intakeMoveUp();
   pros::delay(500);
-  intakeSpinStop();
 
   chassis.pid_turn_set(315,TURN_SPEED);
   chassis.pid_wait();
@@ -150,17 +291,17 @@ void intakeMovementStop(){
   intakeRight.brake();
 }
 
-void intakeSpinIn(){
-  intakeMotor = -127;
-}
+// void  (){
+//   intakeMotor = -127;
+// }
 
-void intakeSpinOut(){
-  intakeMotor = 127;
-}
+// void  (){
+//   intakeMotor = 127;
+// }
 
-void intakeSpinStop(){
-  intakeMotor.brake();
-}
+// void  (){
+//   intakeMotor.brake();
+// }
 
 void hangUp(){
   hangMotor = 90;
