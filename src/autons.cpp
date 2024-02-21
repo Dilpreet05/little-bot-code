@@ -221,53 +221,76 @@ void match(){
 
 }
 void skills(){
+  setIntakeBrake();
   chassis.drive_imu_reset();
 
-  chassis.pid_drive_set(-12_in,127);
+  chassis.pid_drive_set(-20_in,127);
   chassis.pid_wait();
   
-  chassis.pid_drive_set(8_in,DRIVE_SPEED);
+  chassis.pid_drive_set(16_in,DRIVE_SPEED);
   chassis.pid_wait();
   
   chassis.pid_turn_set(45_deg,TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(18_in,DRIVE_SPEED,true);
+  chassis.pid_drive_set(22_in,DRIVE_SPEED,true);
   chassis.pid_wait();
-
-  chassis.pid_turn_set(315,TURN_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_drive_set(8_in,DRIVE_SPEED);
-  chassis.pid_wait();
-
-  skillsCycle();
-
-
-}
-
-void skillsCycle(){
-
-  intakeMoveDown();
-  pros::delay(250);
-  intakeMovementStop();
-
-
-  chassis.pid_drive_set(-10_in,DRIVE_SPEED);
-  chassis.pid_wait();
-
-
-  chassis.pid_turn_set(45_deg,TURN_SPEED);
-  chassis.pid_wait();
-
-  intakeMoveUp();
-  pros::delay(500);
 
   chassis.pid_turn_set(315,TURN_SPEED);
   chassis.pid_wait();
 
   chassis.pid_drive_set(10_in,DRIVE_SPEED);
   chassis.pid_wait();
+  intakeMoveDown();
+  pros::delay(500);
+  intakeMovementStop();
+
+  chassis.drive_imu_reset();
+  for(int k = 0; k < 17;k++){
+    skillsCycle();
+    pros::delay(600);
+  }
+
+
+  chassis.pid_turn_set(90_deg,TURN_SPEED);
+  chassis.pid_wait();
+
+  intakeMoveUp();
+  chassis.pid_drive_set(40_in,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+
+
+  chassis.drive_angle_set(45);
+
+  chassis.pid_turn_set(90_deg,TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(60,DRIVE_SPEED,true);
+  chassis.pid_wait();
+
+  chassis.pid_drive_set(-30_in,127);
+  chassis.pid_wait();
+
+
+
+}
+
+void skillsCycle(){
+
+
+
+
+
+  chassis.pid_turn_set(45_deg,TURN_SPEED);
+  chassis.pid_wait();
+
+  pros::delay(200);
+
+  chassis.pid_turn_set(0,TURN_SPEED);
+  chassis.pid_wait();
+
+
   
 
 }
